@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web@latest"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Bowlby+One+SC&family=Figtree:ital,wght@0,300..900;1,300..900&family=Fjalla+One&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Melodify</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+
+<!-- Player de Áudio -->
+<audio id="audio-player"></audio>
+<!-- Input de ficheiro para o upload -->
+<input type="file" id="file-input" accept="audio/*" style="display: none;" multiple>
+
+<div class="app-layout">
+    
+    <!-- 1. SIDEBAR -->
+    <aside class="sidebar">
+        <div id="Aba-inicial">
+            <h1>
+                <span class="logo-texto">Melodify</span>
+                <i class="ph ph-caret-left"></i>
+            </h1>
+
+            <div class="menu">
+                <i class="ph ph-music-notes-simple"></i>
+                <span>Biblioteca</span>
+            </div>
+
+            <div class="menu">
+                <i class="ph ph-playlist"></i>
+                <span>Playlist</span>
+            </div>
+
+            <div class="menu">
+                <i class="ph ph-download"></i>
+                <span>Downloads</span>
+            </div>
+            
+            <div class="menu">
+                <i class="ph ph-gear"></i>
+                <span>Configurações</span>
+            </div>
+
+            <!-- Botão de Modo Claro -->
+            <div id="light-mode-btn" class="menu">
+                <i id="light-mode-icon" class="ph ph-sun"></i>
+                <span id="light-mode-text">Modo claro</span>
+            </div>
+        </div>
+
+        <div id="Aba-secundaria">
+            <span id="playlist">SUA PLAYLIST</span>
+
+            <div id="Fav">
+                <i class="ph ph-star"></i>
+                <span>Favoritos</span>
+            </div>
+
+
+            <div id="Tocadas">
+                <i class="ph ph-clock"></i>
+                <span>Tocadas recentemente</span>
+            </div>
+
+            <!-- Esse botão faz o upload! -->
+            <div id="Criar">
+                <i class="ph ph-plus"></i>
+                <span>Adicionar nova música</span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- CONTEÚDO PRINCIPAL (COM PARTE FIXA E ROLÁVEL) -->
+    <main class="main-content">
+        
+        <!-- Parte Fixa -->
+        <div class="header-fixo">
+            <h2>Biblioteca</h2>
+
+            <!-- Abas com links para a rolagem -->
+            <div id="container-cabeçalho">
+                <div class="cabeçalho active" data-target="secao-todos">Todos os sons</div>
+                <div class="cabeçalho" data-target="secao-recentes">Recentemente adicionados</div>
+                <div class="cabeçalho" data-target="secao-favoritos">Favoritos</div>
+           </div>
+        </div>
+        
+        <!-- PARTE ROLÁVEL -->
+        <div class="scrollable-content">
+            
+            <!-- Secção 1: Todos os Sons -->
+            <div class="titulo" id="secao-todos">Sua Coleção de Músicas</div>
+            <!-- Container da Lista de Músicas -->
+            <div id="song-list-container"></div>
+
+            <!-- Secção 2: Recentes -->
+            <div class="titulo" id="secao-recentes">Recentemente adicionados</div>
+            <div class="song-item-placeholder"></div>
+            <div class="song-item-placeholder"></div>
+            <div class="song-item-placeholder"></div>
+
+            <!-- Secção 3: Favoritos  -->
+            <div class="titulo" id="secao-favoritos">Favoritos</div>
+            <div class="song-item-placeholder"></div>
+            <div class="song-item-placeholder"></div>
+            <div class="song-item-placeholder"></div>
+            <div class="song-item-placeholder"></div>
+        </div>
+        
+    </main>
+
+</div>
+
+
+<!-- 3. PLAYER BAR -->
+<footer class="player-bar">
+
+    <!-- Controles -->
+    <div class="player-controls">
+        <i id="shuffle-btn" class="ph ph-shuffle" title="Ordem aleatória"></i>
+        <i id="prev-btn" class="ph ph-skip-back" title="Início/Anterior"></i>
+        <i id="rewind-btn" class="ph ph-rewind" title="Retroceder 10 segundos"></i>
+        
+        <i id="play-pause-btn" class="ph ph-play" title="Pausar/Tocar"></i>
+        
+        <i id="forward-btn" class="ph ph-fast-forward" title="Avançar 10 segundos"></i>
+        <i id="next-btn" class="ph ph-skip-forward" title="Próxima música"></i>
+        <i id="repeat-btn" class="ph ph-repeat" title="Repetir música"></i>
+    </div>
+
+    <!-- Barra de Progresso -->
+    <div class="progress-bar-container">
+        <span id="current-time" class="time-display current-time">-:--</span>
+        <div id="progress-total" class="progress-bar-total">
+            <div id="progress-fill" class="progress-bar-fill"></div>
+        </div>
+        <span id="total-time" class="time-display total-time">-:--</span>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
+
